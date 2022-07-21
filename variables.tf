@@ -116,7 +116,7 @@ variable "publish_egress_tag" {
 
 variable "region_filters" {
   default     = []
-  description = "A list of AWS EC2 region filters to use when querying for IP addresses to publish.  If a filter is not specified, the query will be performed in all regions.  An example filter to restrict to US regions looks like this: [{ \"Name\" : \"endpoint\", \"Values\" : [\"*.us-*\"] }].  For more information, refer to https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-regions.html"
+  description = "A list of AWS EC2 region filters to use when querying for IP addresses to publish.  If a filter is not specified, the query will be performed in all regions.  An example filter to restrict to US regions looks like this: [{ \"Name\" : \"endpoint\", \"Values\" : [\"*.us-*\"] }].  For more information, refer to <https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-regions.html>"
   type        = list(object({ Name = string, Values = list(string) }))
 }
 
