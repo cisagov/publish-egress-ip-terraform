@@ -3,6 +3,7 @@
 # See: https://git-scm.com/docs/gitignore
 
 ## Project Specific ##
+add_security_headers.zip
 publish_egress_ip.zip
 
 ## Python ##
