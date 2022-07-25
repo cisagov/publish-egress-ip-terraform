@@ -8,7 +8,7 @@ resource "aws_route53_record" "rules_vm_A" {
   alias {
     evaluate_target_health = false
     name                   = aws_cloudfront_distribution.rules_s3_distribution.domain_name
-    zone_id                = "Z2FDTNDATAQYW2"
+    zone_id                = local.cloudfront_zone_id
   }
   name    = var.domain
   type    = "A"
@@ -21,7 +21,7 @@ resource "aws_route53_record" "rules_vm_AAAA" {
   alias {
     evaluate_target_health = false
     name                   = aws_cloudfront_distribution.rules_s3_distribution.domain_name
-    zone_id                = "Z2FDTNDATAQYW2"
+    zone_id                = local.cloudfront_zone_id
   }
   name    = var.domain
   type    = "AAAA"
