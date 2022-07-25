@@ -34,5 +34,10 @@ locals {
   # as assume role session names.
   caller_user_name = split("/", data.aws_caller_identity.current.arn)[1]
 
+  # The Route53 hosted zone ID for every CloudFront distribution is always the
+  # same, as mentioned here:
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html#cfn-route53-aliastarget-hostedzoneid
+  cloudfront_zone_id = "Z2FDTNDATAQYW2"
+
   deployment_account_id = data.aws_caller_identity.deploy.account_id
 }
