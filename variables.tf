@@ -20,7 +20,7 @@ variable "deployment_role_arn" {
 }
 
 variable "route53_role_arn" {
-  description = "The ARN of the IAM role to use to modify route53 DNS resources."
+  description = "The ARN of the IAM role to use to modify Route53 DNS resources."
   type        = string
 }
 

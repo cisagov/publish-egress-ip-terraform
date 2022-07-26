@@ -149,8 +149,8 @@ accessed at: `https://<var.domain>/<var.file_configs.filename>`
 | publish\_egress\_tag | The name of the AWS tag whose value represents whether the EC2 instance or elastic IP should have its public IP address published. | `string` | `"Publish Egress"` | no |
 | region\_filters | A list of AWS EC2 region filters to use when querying for IP addresses to publish.  If a filter is not specified, the query will be performed in all regions.  An example filter to restrict to US regions looks like this: [{ "Name" : "endpoint", "Values" : ["*.us-*"] }].  For more information, refer to <https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-regions.html> | `list(object({ Name = string, Values = list(string) }))` | `[]` | no |
 | root\_object | The root object in the S3 bucket to serve when no path is provided or an error occurs. | `string` | `"all.txt"` | no |
-| route53\_role\_arn | The ARN of the IAM role to use to modify route53 DNS resources. | `string` | n/a | yes |
-| tags | Tags to apply to all AWS resources created | `map(string)` | `{}` | no |
+| route53\_role\_arn | The ARN of the IAM role to use to modify Route53 DNS resources. | `string` | n/a | yes |
+| tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
 
 ## Outputs ##
 
