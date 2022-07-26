@@ -7,15 +7,15 @@
 resource "aws_lambda_function" "publish_egress_ip" {
   provider = aws.deploy
 
-  filename         = var.lambda_zip_filename
-  source_code_hash = filebase64sha256(var.lambda_zip_filename)
-  function_name    = var.lambda_function_name
-  role             = aws_iam_role.lambdaexecution_role.arn
-  handler          = "lambda_handler.handler"
-  runtime          = "python3.9"
-  timeout          = 600
-  memory_size      = 128
   description      = var.lambda_function_description
+  filename         = var.lambda_zip_filename
+  function_name    = var.lambda_function_name
+  handler          = "lambda_handler.handler"
+  memory_size      = 128
+  role             = aws_iam_role.lambdaexecution_role.arn
+  runtime          = "python3.9"
+  source_code_hash = filebase64sha256(var.lambda_zip_filename)
+  timeout          = 600
 }
 
 # The CloudWatch log group for the Lambda function
