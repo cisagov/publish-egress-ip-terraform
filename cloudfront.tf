@@ -77,7 +77,7 @@ module "security_header_lambda" {
   source  = "transcend-io/lambda-at-edge/aws"
   version = "0.5.0"
 
-  description            = "Adds HSTS and other security headers to the response"
+  description            = "Adds HSTS and other security headers to the response."
   lambda_code_source_dir = "${path.root}/add_security_headers"
   name                   = "add_security_headers"
   s3_artifact_bucket     = aws_s3_bucket.lambda_at_edge.id
