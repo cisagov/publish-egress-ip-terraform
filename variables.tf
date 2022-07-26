@@ -86,7 +86,7 @@ variable "lambda_function_name" {
 
 variable "lambda_schedule_interval" {
   default     = 60
-  description = "The number of minutes betweeen scheduled runs of the Lambda function to publish egress IP addresses."
+  description = "The number of minutes between scheduled runs of the Lambda function to publish egress IP addresses."
   type        = number
 }
 
