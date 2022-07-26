@@ -30,9 +30,9 @@ resource "aws_cloudwatch_log_group" "lambda_logs" {
 resource "aws_cloudwatch_event_rule" "lambda_schedule" {
   provider = aws.deploy
 
-  description         = format("Executes %s Lambda every %s minutes", var.lambda_function_name, var.lambda_schedule_interval)
-  name                = format("%s-every-%s-minutes", var.lambda_function_name, var.lambda_schedule_interval)
-  schedule_expression = format("rate(%s minutes)", var.lambda_schedule_interval)
+  description         = format("Executes %s Lambda every %d minutes", var.lambda_function_name, var.lambda_schedule_interval)
+  name                = format("%s-every-%d-minutes", var.lambda_function_name, var.lambda_schedule_interval)
+  schedule_expression = format("rate(%d minutes)", var.lambda_schedule_interval)
 }
 
 resource "aws_cloudwatch_event_target" "lambda_schedule" {
