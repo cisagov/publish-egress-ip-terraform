@@ -63,7 +63,7 @@ variable "extraorg_account_ids" {
 variable "file_configs" {
   default     = []
   type        = list(object({ app_regex = string, description = string, filename = string, static_ips = list(string) }))
-  description = "A list of objects that define the files to be published.  \"app_regex\" specifies a regular expression matching the application name (based on the var.application_tag).  \"description\" is the description of the published file.  \"filename\" is the name to assign the published file.  \"static_ips\" is a list of CIDR blocks that will always be included in the published file.  An example file configuration looks like this: [{\"app_regex\": \".*\", \"description\": \"This file contains a list of all public IP addresses to be published.\", \"filename\": \"all.txt\",  \"static_ips\": []}, {\"app_regex\": \"^Vulnerability Scanning$\", \"description\": \"This file contains a list of all IPs used for Vulnerability Scanning.\", \"filename\": \"vs.txt\",  \"static_ips\": [\"192.168.1.1/32\", \"192.168.2.2/32\"]}]"
+  description = "A list of objects that define the files to be published.  \"app_regex\" specifies a regular expression matching the application name (based on the var.application_tag).  \"description\" is the description of the published file.  \"filename\" is the name to assign the published file.  \"static_ips\" is a list of CIDR blocks that will always be included in the published file.  An example file configuration looks like this: `[{\"app_regex\": \".*\", \"description\": \"This file contains a list of all public IP addresses to be published.\", \"filename\": \"all.txt\",  \"static_ips\": []}, {\"app_regex\": \"^Vulnerability Scanning$\", \"description\": \"This file contains a list of all IPs used for Vulnerability Scanning.\", \"filename\": \"vs.txt\",  \"static_ips\": [\"192.168.1.1/32\", \"192.168.2.2/32\"]}]`"
 }
 
 variable "file_header" {
@@ -116,7 +116,7 @@ variable "publish_egress_tag" {
 
 variable "region_filters" {
   default     = []
-  description = "A list of AWS EC2 region filters to use when querying for IP addresses to publish.  If a filter is not specified, the query will be performed in all regions.  An example filter to restrict to US regions looks like this: [{ \"Name\" : \"endpoint\", \"Values\" : [\"*.us-*\"] }].  For more information, refer to <https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-regions.html>"
+  description = "A list of AWS EC2 region filters to use when querying for IP addresses to publish.  If a filter is not specified, the query will be performed in all regions.  An example filter to restrict to US regions looks like this: `[{ \"Name\" : \"endpoint\", \"Values\" : [\"*.us-*\"] }]`.  For more information, refer to <https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-regions.html>"
   type        = list(object({ Name = string, Values = list(string) }))
 }
 
