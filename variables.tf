@@ -86,8 +86,13 @@ variable "lambda_function_name" {
 
 variable "lambda_schedule_interval" {
   default     = 60
-  description = "The number of minutes between scheduled runs of the Lambda function to publish egress IP addresses."
+  description = "The number of minutes between scheduled runs of the Lambda function to publish egress IP addresses.  This value must be an integer greater than 0."
   type        = number
+
+  validation {
+    condition     = try(parseint(tostring(var.lambda_schedule_interval), 10), null) == var.lambda_schedule_interval && var.lambda_schedule_interval > 0
+    error_message = "lambda_schedule_interval must be an integer greater than zero."
+  }
 }
 
 variable "lambda_zip_filename" {
