@@ -92,7 +92,7 @@ resource "aws_cloudfront_distribution" "rules_s3_distribution" {
   }
 
   aliases             = [var.domain]
-  comment             = "Created by cisagov/publish-egress-ip-terraform"
+  comment             = "Created by cisagov/publish-egress-ip-terraform."
   default_root_object = var.root_object
   enabled             = true
   is_ipv6_enabled     = true
