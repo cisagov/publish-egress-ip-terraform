@@ -10,7 +10,7 @@ provider "aws" {
 }
 
 # The provider used to create resources inside the AWS account where
-# the lambda and S3 bucket will be deployed.
+# the Lambda and S3 bucket will be deployed.
 provider "aws" {
   alias = "deploy"
   assume_role {
@@ -23,7 +23,7 @@ provider "aws" {
   region = var.aws_region
 }
 
-# The provider that can modify route53 resources in the DNS account.
+# The provider that can modify Route53 resources in the DNS account.
 provider "aws" {
   alias = "route53resourcechange"
   assume_role {

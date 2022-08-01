@@ -115,13 +115,13 @@ variable "lambdaexecution_role_name" {
 
 variable "publish_egress_tag" {
   default     = "Publish Egress"
-  description = "The name of the AWS tag whose value represents whether the EC2 instance or elastic IP should have its public IP address published."
+  description = "The name of the AWS resource tag whose value represents whether the EC2 instance or elastic IP should have its public IP address published."
   type        = string
 }
 
 variable "region_filters" {
   default     = []
-  description = "A list of AWS EC2 region filters to use when querying for IP addresses to publish.  If a filter is not specified, the query will be performed in all regions.  An example filter to restrict to US regions looks like this: `[{ \"Name\" : \"endpoint\", \"Values\" : [\"*.us-*\"] }]`.  For more information, refer to <https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-regions.html>"
+  description = "A list of AWS EC2 region filters to use when querying for IP addresses to publish.  If a filter is not specified, the query will be performed in all regions.  An example filter to restrict to US regions looks like this: `[{ \"Name\" : \"endpoint\", \"Values\" : [\"*.us-*\"] }]`.  For more information, refer to <https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-regions.html>."
   type        = list(object({ Name = string, Values = list(string) }))
 }
 
