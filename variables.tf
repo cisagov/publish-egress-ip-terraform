@@ -90,7 +90,7 @@ variable "lambda_schedule_interval" {
   type        = number
 
   validation {
-    condition     = try(parseint(tostring(var.lambda_schedule_interval), 10), null) == var.lambda_schedule_interval && var.lambda_schedule_interval > 0
+    condition     = alltrue([floor(var.lambda_schedule_interval) == var.lambda_schedule_interval, var.lambda_schedule_interval > 0])
     error_message = "lambda_schedule_interval must be an integer greater than zero."
   }
 }
