@@ -32,7 +32,7 @@ resource "aws_cloudwatch_event_rule" "lambda_schedule" {
 
   description         = format("Executes %s Lambda every %d minute(s).", var.lambda_function_name, var.lambda_schedule_interval)
   name                = format("%s-every-%d-minutes", var.lambda_function_name, var.lambda_schedule_interval)
-  schedule_expression = format("rate(%d minutes)", var.lambda_schedule_interval)
+  schedule_expression = format("rate(%d minute%s)", var.lambda_schedule_interval, var.lambda_schedule_interval != 1 ? "s" : "")
 }
 
 resource "aws_cloudwatch_event_target" "lambda_schedule" {
