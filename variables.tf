@@ -67,9 +67,9 @@ variable "file_configs" {
 }
 
 variable "file_header" {
-  default     = "###\n# https://{domain}/{filename}\n# {timestamp}\n# {description}\n###\n"
-  description = "The header template for each published file.  The following variables are available within the template: {domain} - the domain where the published files are located, {filename} - the name of the published file, {timestamp} - the timestamp when the file was published, {description} - the description of the published file"
-  type        = string
+  default     = ["###", "# https://{domain}/{filename}", "# {timestamp}", "# {description}", "###"]
+  description = "The header template for each published file.  When the file is published, newline characters are automatically added between each item in the list.  The following variables are available within the template: {domain} - the domain where the published files are located, {filename} - the name of the published file, {timestamp} - the timestamp when the file was published, {description} - the description of the published file"
+  type        = list(string)
 }
 
 variable "lambda_function_description" {
