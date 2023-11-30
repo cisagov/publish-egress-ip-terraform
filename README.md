@@ -30,18 +30,19 @@ module "example" {
 
 - [Basic usage](https://github.com/cisagov/publish-egress-ip-terraform/tree/develop/examples/basic_usage)
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements ##
 
 | Name | Version |
 |------|---------|
 | terraform | ~> 1.0 |
-| aws | ~> 3.38 |
+| aws | ~> 4.9 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 3.38 |
+| aws | ~> 4.9 |
 
 ## Modules ##
 
@@ -73,6 +74,7 @@ No modules.
 | id | The EC2 instance ID. |
 | private\_ip | The private IP of the EC2 instance. |
 | subnet\_id | The ID of the subnet where the EC2 instance is deployed. |
+<!-- END_TF_DOCS -->
 
 ## Notes ##
 
