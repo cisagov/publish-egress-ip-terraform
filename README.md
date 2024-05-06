@@ -55,7 +55,7 @@ and related resources.
 1. Create a Terraform workspace (if you haven't already done so) for
    your assessment by running `terraform workspace new <workspace_name>`.
 1. Create a `<workspace_name>.tfvars` file with all of the required
-   variables (see [Inputs](#Inputs) below for details).
+   variables (see [Inputs](#inputs) below for details).
 1. Run the command `terraform init`.
 1. Create all Terraform infrastructure by running the command:
 
