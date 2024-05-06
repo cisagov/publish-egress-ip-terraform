@@ -60,10 +60,9 @@ resource "aws_s3_bucket_versioning" "lambda_at_edge" {
 resource "aws_s3_bucket_public_access_block" "lambda_artifact_bucket" {
   provider = aws.deploy
 
-  bucket = aws_s3_bucket.lambda_at_edge.id
-
   block_public_acls       = true
   block_public_policy     = true
+  bucket                  = aws_s3_bucket.lambda_at_edge.id
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
@@ -86,49 +85,12 @@ module "security_header_lambda" {
 resource "aws_cloudfront_distribution" "rules_s3_distribution" {
   provider = aws.deploy
 
-  origin {
-    domain_name = aws_s3_bucket.egress_info.bucket_regional_domain_name
-    origin_id   = local.s3_origin_id
-  }
-
   aliases             = [var.domain]
   comment             = "Created by cisagov/publish-egress-ip-terraform."
   default_root_object = var.root_object
   enabled             = true
   is_ipv6_enabled     = true
-
-  default_cache_behavior {
-    allowed_methods = ["GET", "HEAD"]
-    cached_methods  = ["GET", "HEAD"]
-    lambda_function_association {
-      # Inject security headers via Lambda@Edge
-      event_type   = "origin-response"
-      include_body = false
-      lambda_arn   = module.security_header_lambda.arn
-    }
-    target_origin_id = local.s3_origin_id
-
-    forwarded_values {
-      query_string = false
-      cookies {
-        forward = "none"
-      }
-    }
-    compress               = true
-    default_ttl            = 30
-    max_ttl                = 30
-    min_ttl                = 0
-    viewer_protocol_policy = "redirect-to-https"
-  }
-
-  price_class = "PriceClass_100"
-
-  restrictions {
-    geo_restriction {
-      locations        = ["AS", "GU", "MP", "PR", "US", "VI"]
-      restriction_type = "whitelist"
-    }
-  }
+  price_class         = "PriceClass_100"
 
   custom_error_response {
     error_caching_min_ttl = 30
@@ -142,6 +104,43 @@ resource "aws_cloudfront_distribution" "rules_s3_distribution" {
     error_code            = 404
     response_code         = 200
     response_page_path    = "/${var.root_object}"
+  }
+
+  default_cache_behavior {
+    allowed_methods        = ["GET", "HEAD"]
+    cached_methods         = ["GET", "HEAD"]
+    compress               = true
+    default_ttl            = 30
+    max_ttl                = 30
+    min_ttl                = 0
+    target_origin_id       = local.s3_origin_id
+    viewer_protocol_policy = "redirect-to-https"
+
+    forwarded_values {
+      query_string = false
+      cookies {
+        forward = "none"
+      }
+    }
+
+    lambda_function_association {
+      # Inject security headers via Lambda@Edge
+      event_type   = "origin-response"
+      include_body = false
+      lambda_arn   = module.security_header_lambda.arn
+    }
+  }
+
+  origin {
+    domain_name = aws_s3_bucket.egress_info.bucket_regional_domain_name
+    origin_id   = local.s3_origin_id
+  }
+
+  restrictions {
+    geo_restriction {
+      locations        = ["AS", "GU", "MP", "PR", "US", "VI"]
+      restriction_type = "whitelist"
+    }
   }
 
   viewer_certificate {
