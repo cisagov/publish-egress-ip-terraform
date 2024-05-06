@@ -4,15 +4,6 @@ resource "aws_s3_bucket" "egress_info" {
   provider = aws.deploy
 
   bucket = var.bucket_name
-
-  # TODO: Remove this lifecycle block after we move to version 4.x of the
-  # Terraform AWS provider.  For more info, see:
-  # https://github.com/cisagov/publish-egress-ip-terraform/issues/5
-  lifecycle {
-    ignore_changes = [
-      server_side_encryption_configuration
-    ]
-  }
 }
 
 resource "aws_s3_bucket_acl" "egress_info" {
