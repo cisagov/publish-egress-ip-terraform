@@ -96,7 +96,7 @@ variable "lambda_schedule_interval" {
 }
 
 variable "lambda_zip_filename" {
-  default     = "publish_egress_ip.zip"
+  default     = "lambda_build.zip"
   description = "The name of the ZIP file containing the Lambda function deployment package to publish egress IP addresses.  The file must be located in the root directory of this project."
   type        = string
 }

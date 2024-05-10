@@ -4,7 +4,7 @@
 
 ## Project Specific ##
 add_security_headers.zip
-publish_egress_ip.zip
+lambda_build.zip
 
 ## Python ##
 __pycache__

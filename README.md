@@ -16,7 +16,7 @@ and related resources.
 - Access to all of the Terraform remote states specified in
   [`remote_states.tf`](remote_states.tf).
 - A valid Lambda deployment file must be present in the root directory and have
-  the same name as `var.lambda_zip_filename` (e.g. "publish_egress_ip.zip").
+  the same name as `var.lambda_zip_filename` (e.g. "lambda_build.zip").
 - A Terraform [variables](variables.tf) file customized for your
   assessment environment, for example:
 
@@ -144,7 +144,7 @@ accessed at: `https://<var.domain>/<var.file_configs.filename>`
 | lambda\_function\_description | The description of the Lambda function. | `string` | `"Lambda function to publish egress IP addresses to an S3 bucket configured with a CloudFront distribution for HTTPS access."` | no |
 | lambda\_function\_name | The name of the Lambda function to publish egress IP addresses. | `string` | `"publish-egress-ip"` | no |
 | lambda\_schedule\_interval | The number of minutes between scheduled runs of the Lambda function to publish egress IP addresses.  This value must be an integer greater than 0. | `number` | `60` | no |
-| lambda\_zip\_filename | The name of the ZIP file containing the Lambda function deployment package to publish egress IP addresses.  The file must be located in the root directory of this project. | `string` | `"publish_egress_ip.zip"` | no |
+| lambda\_zip\_filename | The name of the ZIP file containing the Lambda function deployment package to publish egress IP addresses.  The file must be located in the root directory of this project. | `string` | `"lambda_build.zip"` | no |
 | lambdaexecution\_role\_description | The description to associate with the IAM role (and policy) that allows the publish-egress-ip Lambda to query other accounts for public EC2 IP information, publish objects to the S3 bucket, and write CloudWatch logs. | `string` | `"Allows the publish-egress-ip Lambda to query other accounts for public EC2 IP information, publish objects to the S3 bucket, and write CloudWatch logs."` | no |
 | lambdaexecution\_role\_name | The name to assign the IAM role (and policy) that allows the publish-egress-ip Lambda to query other accounts for public EC2 IP information, publish objects to the S3 bucket, and write CloudWatch logs. | `string` | `"PublishEgressIPLambda"` | no |
 | publish\_egress\_tag | The name of the AWS resource tag whose value represents whether the EC2 instance or elastic IP should have its public IP address published. | `string` | `"Publish Egress"` | no |
