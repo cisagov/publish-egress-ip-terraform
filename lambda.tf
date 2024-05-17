@@ -15,7 +15,7 @@ resource "aws_lambda_function" "publish_egress_ip" {
   role             = aws_iam_role.lambdaexecution_role.arn
   runtime          = "python3.9"
   source_code_hash = filebase64sha256(var.lambda_zip_filename)
-  timeout          = 600
+  timeout          = 900
 }
 
 # The CloudWatch log group for the Lambda function
