@@ -48,6 +48,18 @@ variable "aws_region" {
   type        = string
 }
 
+variable "cloudfront_distribution_oac_description" {
+  default     = "Allow CloudFront to securely read from an S3 bucket."
+  description = "The description to apply to the CloudFront Origin Access Control."
+  type        = string
+}
+
+variable "cloudfront_distribution_oac_name" {
+  default     = "publish-egress-ip-s3-distribution"
+  description = "The name for the CloudFront Origin Access Control."
+  type        = string
+}
+
 variable "ec2_read_role_name" {
   default     = "EC2ReadOnly"
   description = "The name of the IAM role that allows read access to the necessary EC2 attributes.  Note that this role must exist in each account that you want to query."

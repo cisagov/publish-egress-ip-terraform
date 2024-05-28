@@ -76,7 +76,18 @@ module "security_header_lambda" {
   s3_artifact_bucket = aws_s3_bucket.lambda_at_edge.id
 }
 
-resource "aws_cloudfront_distribution" "rules_s3_distribution" {
+resource "aws_cloudfront_origin_access_control" "egress_info" {
+  provider = aws.deploy
+
+  description = var.cloudfront_distribution_oac_description
+  name        = var.cloudfront_distribution_oac_name
+
+  origin_access_control_origin_type = "s3"
+  signing_behavior                  = "always"
+  signing_protocol                  = "sigv4"
+}
+
+resource "aws_cloudfront_distribution" "egress_info" {
   provider = aws.deploy
 
   aliases             = [var.domain]
@@ -126,8 +137,9 @@ resource "aws_cloudfront_distribution" "rules_s3_distribution" {
   }
 
   origin {
-    domain_name = aws_s3_bucket.egress_info.bucket_regional_domain_name
-    origin_id   = local.s3_origin_id
+    domain_name              = aws_s3_bucket.egress_info.bucket_regional_domain_name
+    origin_access_control_id = aws_cloudfront_origin_access_control.egress_info.id
+    origin_id                = local.s3_origin_id
   }
 
   restrictions {
