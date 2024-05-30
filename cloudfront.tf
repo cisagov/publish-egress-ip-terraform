@@ -30,6 +30,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "lambda_at_edge" {
   provider = aws.deploy
 
   bucket = aws_s3_bucket.lambda_at_edge.id
+
   rule {
     apply_server_side_encryption_by_default {
       sse_algorithm = "AES256"
@@ -41,6 +42,7 @@ resource "aws_s3_bucket_versioning" "lambda_at_edge" {
   provider = aws.deploy
 
   bucket = aws_s3_bucket.lambda_at_edge.id
+
   versioning_configuration {
     status = "Enabled"
   }
@@ -63,7 +65,6 @@ module "security_header_lambda" {
   providers = {
     aws = aws.deploy
   }
-
   source  = "transcend-io/lambda-at-edge/aws"
   version = "0.5.0"
 
