@@ -38,9 +38,7 @@ resource "aws_cloudwatch_event_rule" "lambda_schedule" {
 resource "aws_cloudwatch_event_target" "lambda_schedule" {
   provider = aws.deploy
 
-  arn       = aws_lambda_function.publish_egress_ip.arn
-  rule      = aws_cloudwatch_event_rule.lambda_schedule.name
-  target_id = "lambda"
+  arn = aws_lambda_function.publish_egress_ip.arn
 
   input = jsonencode({
     account_ids        = tolist(local.accounts_to_check)
@@ -54,6 +52,9 @@ resource "aws_cloudwatch_event_target" "lambda_schedule" {
     region_filters     = var.region_filters
     task               = "publish"
   })
+
+  rule      = aws_cloudwatch_event_rule.lambda_schedule.name
+  target_id = "lambda"
 }
 
 # Allow the CloudWatch event to invoke the Lambda function
