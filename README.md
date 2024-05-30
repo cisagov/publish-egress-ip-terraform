@@ -20,7 +20,7 @@ and related resources.
 - A Terraform [variables](variables.tf) file customized for your
   assessment environment, for example:
 
-  ```console
+  ```hcl
   bucket_name         = "s3-cdn.egress-info.my.domain.gov"
   domain              = "egress-info.my.domain.gov"
   deployment_role_arn = "arn:aws:iam::123456789012:role/deployment-role"
