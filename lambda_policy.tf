@@ -27,8 +27,6 @@ data "aws_iam_policy_document" "lambdaexecution_doc" {
   statement {
     actions = [
       "s3:PutObject",
-      "s3:PutObjectAcl",
-      "s3:PutObjectVersionAcl",
     ]
     resources = [
       "${aws_s3_bucket.egress_info.arn}/*"
