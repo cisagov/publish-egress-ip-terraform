@@ -98,7 +98,8 @@ accessed at: `https://<var.domain>/<var.file_configs.filename>`
 
 | Name | Type |
 |------|------|
-| [aws_cloudfront_distribution.rules_s3_distribution](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution) | resource |
+| [aws_cloudfront_distribution.egress_info](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution) | resource |
+| [aws_cloudfront_origin_access_control.egress_info](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_access_control) | resource |
 | [aws_cloudwatch_event_rule.lambda_schedule](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_rule) | resource |
 | [aws_cloudwatch_event_target.lambda_schedule](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_target) | resource |
 | [aws_cloudwatch_log_group.lambda_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
@@ -111,7 +112,9 @@ accessed at: `https://<var.domain>/<var.file_configs.filename>`
 | [aws_route53_record.rules_vm_AAAA](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [aws_s3_bucket.egress_info](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket.lambda_at_edge](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
-| [aws_s3_bucket_acl.egress_info](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl) | resource |
+| [aws_s3_bucket_ownership_controls.egress_info](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_ownership_controls) | resource |
+| [aws_s3_bucket_policy.egress_info](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
+| [aws_s3_bucket_public_access_block.egress_info](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
 | [aws_s3_bucket_public_access_block.lambda_artifact_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
 | [aws_s3_bucket_server_side_encryption_configuration.egress_info](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
 | [aws_s3_bucket_server_side_encryption_configuration.lambda_at_edge](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
@@ -119,6 +122,7 @@ accessed at: `https://<var.domain>/<var.file_configs.filename>`
 | [aws_acm_certificate.rules_cert](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/acm_certificate) | data source |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_caller_identity.deploy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.egress_info](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.lambda_assume_role_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.lambdaexecution_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_organizations_organization.org](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/organizations_organization) | data source |
@@ -135,8 +139,11 @@ accessed at: `https://<var.domain>/<var.file_configs.filename>`
 | application\_tag | The name of the AWS tag whose value represents the application associated with an IP address. | `string` | `"Application"` | no |
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
 | bucket\_name | The name of the S3 bucket to publish egress IP address information to. | `string` | n/a | yes |
+| cloudfront\_distribution\_oac\_description | The description to apply to the CloudFront Origin Access Control. | `string` | `"Allow CloudFront to securely read from an S3 bucket."` | no |
+| cloudfront\_distribution\_oac\_name | The name for the CloudFront Origin Access Control. | `string` | `"publish-egress-ip-s3-distribution"` | no |
 | deployment\_role\_arn | The ARN of the IAM role to use to deploy the Lambda and all related resources. | `string` | n/a | yes |
 | domain | The domain hosting the published file(s) containing egress IPs.  Also used for the CloudFront distribution and certificate. | `string` | n/a | yes |
+| domain\_aliases | A list of domain aliases to associate with the CloudFront distribution.  These domains must be included (as subject alternative names) in the certificate used by the distribution. | `list(string)` | `[]` | no |
 | ec2\_read\_role\_name | The name of the IAM role that allows read access to the necessary EC2 attributes.  Note that this role must exist in each account that you want to query. | `string` | `"EC2ReadOnly"` | no |
 | extraorg\_account\_ids | A list of AWS account IDs corresponding to "extra" accounts that you want to query for egress IPs to publish. | `list(string)` | `[]` | no |
 | file\_configs | A list of objects that define the files to be published.  "app\_regex" specifies a regular expression matching the application name (based on the variable var.application\_tag).  "description" is the description of the published file.  "filename" is the name to assign the published file.  "static\_ips" is a list of CIDR blocks that will always be included in the published file.  An example file configuration looks like this: `[{"app_regex": ".*", "description": "This file contains a list of all public IP addresses to be published.", "filename": "all.txt",  "static_ips": []}, {"app_regex": "^Vulnerability Scanning$", "description": "This file contains a list of all IPs used for Vulnerability Scanning.", "filename": "vs.txt",  "static_ips": ["192.168.1.1/32", "192.168.2.2/32"]}]` | `list(object({ app_regex = string, description = string, filename = string, static_ips = list(string) }))` | `[]` | no |
