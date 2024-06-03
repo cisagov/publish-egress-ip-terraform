@@ -91,7 +91,7 @@ resource "aws_cloudfront_origin_access_control" "egress_info" {
 resource "aws_cloudfront_distribution" "egress_info" {
   provider = aws.deploy
 
-  aliases             = [var.domain]
+  aliases             = concat([var.domain], var.domain_aliases)
   comment             = "Created by cisagov/publish-egress-ip-terraform."
   default_root_object = var.root_object
   enabled             = true

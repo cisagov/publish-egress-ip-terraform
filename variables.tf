@@ -60,6 +60,12 @@ variable "cloudfront_distribution_oac_name" {
   type        = string
 }
 
+variable "domain_aliases" {
+  default     = []
+  description = "A list of domain aliases to associate with the CloudFront distribution.  These domains must be included (as subject alternative names) in the certificate used by the distribution."
+  type        = list(string)
+}
+
 variable "ec2_read_role_name" {
   default     = "EC2ReadOnly"
   description = "The name of the IAM role that allows read access to the necessary EC2 attributes.  Note that this role must exist in each account that you want to query."
