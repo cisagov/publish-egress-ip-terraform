@@ -75,7 +75,7 @@ accessed at: `https://<var.domain>/<var.file_configs.filename>`
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 1.0 |
+| terraform | ~> 1.1 |
 | aws | ~> 4.9 |
 
 ## Providers ##
