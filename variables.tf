@@ -92,9 +92,9 @@ variable "extraorg_account_ids" {
 
 variable "file_configs" {
   default     = []
-  type        = list(object({ app_regex = string, description = string, filename = string, static_ips = list(string) }))
-  nullable    = false
   description = "A list of objects that define the files to be published.  \"app_regex\" specifies a regular expression matching the application name (based on the variable var.application_tag).  \"description\" is the description of the published file.  \"filename\" is the name to assign the published file.  \"static_ips\" is a list of CIDR blocks that will always be included in the published file.  An example file configuration looks like this: `[{\"app_regex\": \".*\", \"description\": \"This file contains a list of all public IP addresses to be published.\", \"filename\": \"all.txt\",  \"static_ips\": []}, {\"app_regex\": \"^Vulnerability Scanning$\", \"description\": \"This file contains a list of all IPs used for Vulnerability Scanning.\", \"filename\": \"vs.txt\",  \"static_ips\": [\"192.168.1.1/32\", \"192.168.2.2/32\"]}]`"
+  nullable    = false
+  type        = list(object({ app_regex = string, description = string, filename = string, static_ips = list(string) }))
 }
 
 variable "file_header" {
