@@ -159,6 +159,7 @@ accessed at: `https://<var.domain>/<var.file_configs.filename>`
 | root\_object | The root object in the S3 bucket to serve when no path is provided or an error occurs. | `string` | `"all.txt"` | no |
 | route53\_role\_arn | The ARN of the IAM role to use to modify Route53 DNS resources. | `string` | n/a | yes |
 | tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
+| terraform\_state\_bucket | The name of the S3 bucket where Terraform state is stored. | `string` | n/a | yes |
 
 ## Outputs ##
 
