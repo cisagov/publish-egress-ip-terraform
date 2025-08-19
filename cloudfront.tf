@@ -71,10 +71,8 @@ module "security_header_lambda" {
   description            = "Adds HSTS and other security headers to the response."
   lambda_code_source_dir = "${path.root}/add_security_headers"
   name                   = "add_security_headers"
-  # nodejs18.x appears to be the latest supported runtime until we move beyond
-  # version 4.9 of the Terraform AWS provider.
-  runtime            = "nodejs18.x"
-  s3_artifact_bucket = aws_s3_bucket.lambda_at_edge.id
+  runtime                = "nodejs22.x"
+  s3_artifact_bucket     = aws_s3_bucket.lambda_at_edge.id
 }
 
 resource "aws_cloudfront_origin_access_control" "egress_info" {
