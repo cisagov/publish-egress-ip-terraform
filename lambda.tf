@@ -13,7 +13,7 @@ resource "aws_lambda_function" "publish_egress_ip" {
   handler          = "lambda_handler.handler"
   memory_size      = 128
   role             = aws_iam_role.lambdaexecution_role.arn
-  runtime          = "python3.12"
+  runtime          = "python3.13"
   source_code_hash = filebase64sha256(var.lambda_zip_filename)
   timeout          = 900
 }
