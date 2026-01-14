@@ -1,6 +1,8 @@
 # publish-egress-ip-terraform #
 
 [![GitHub Build Status](https://github.com/cisagov/publish-egress-ip-terraform/workflows/build/badge.svg)](https://github.com/cisagov/publish-egress-ip-terraform/actions)
+[![License](https://img.shields.io/github/license/cisagov/publish-egress-ip-terraform)](https://spdx.org/licenses/)
+[![CodeQL](https://github.com/cisagov/publish-egress-ip-terraform/workflows/CodeQL/badge.svg)](https://github.com/cisagov/publish-egress-ip-terraform/actions/workflows/codeql-analysis.yml)
 
 This repository contains Terraform code to deploy
 [`cisagov/publish-egress-ip-lambda`](https://github.com/cisagov/publish-egress-ip-lambda)
