@@ -76,14 +76,14 @@ accessed at: `https://<var.domain>/<var.file_configs.filename>`
 ## Requirements ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | terraform | ~> 1.1 |
 | aws | ~> 6.7 |
 
 ## Providers ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | aws | ~> 6.7 |
 | aws.deploy | ~> 6.7 |
 | aws.organizationsreadonly | ~> 6.7 |
@@ -93,13 +93,13 @@ accessed at: `https://<var.domain>/<var.file_configs.filename>`
 ## Modules ##
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | security\_header\_lambda | transcend-io/lambda-at-edge/aws | 0.5.0 |
 
 ## Resources ##
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_cloudfront_distribution.egress_info](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution) | resource |
 | [aws_cloudfront_origin_access_control.egress_info](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_access_control) | resource |
 | [aws_cloudwatch_event_rule.lambda_schedule](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_rule) | resource |
@@ -136,7 +136,7 @@ accessed at: `https://<var.domain>/<var.file_configs.filename>`
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | account\_name\_regex | A regular expression that will be applied against the names of all non-master accounts in the AWS organization.  If the name of an account matches the regular expression, that account will be queried for egress IP addresses to publish.  The default value should not match any valid account name. | `string` | `"^$"` | no |
 | application\_tag | The name of the AWS tag whose value represents the application associated with an IP address. | `string` | `"Application"` | no |
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
@@ -166,7 +166,7 @@ accessed at: `https://<var.domain>/<var.file_configs.filename>`
 ## Outputs ##
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | bucket | The S3 bucket where egress IP address information is published. |
 <!-- END_TF_DOCS -->
 
