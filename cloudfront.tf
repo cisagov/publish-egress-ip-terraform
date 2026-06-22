@@ -66,7 +66,7 @@ module "security_header_lambda" {
     aws = aws.deploy
   }
   source  = "transcend-io/lambda-at-edge/aws"
-  version = "0.5.0"
+  version = "0.6.0"
 
   description            = "Adds HSTS and other security headers to the response."
   lambda_code_source_dir = "${path.root}/add_security_headers"
